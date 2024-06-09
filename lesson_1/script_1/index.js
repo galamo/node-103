@@ -5,4 +5,4 @@ i++
 
 setTimeout(() => {
     console.log(user, user2, i)
-}, 15000);
+}, 1500);
