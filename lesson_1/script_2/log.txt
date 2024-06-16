@@ -1,0 +1,5 @@
+[2024-06-16T15:24:32.493Z] Start init
+[2024-06-16T15:24:32.950Z] Jokes api response success
+[2024-06-16T15:24:33.573Z] randomUsers api response success
+[2024-06-16T15:24:33.573Z] Finish init
+[2024-06-16T15:24:33.573Z] results10 1
