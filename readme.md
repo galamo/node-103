@@ -23,3 +23,10 @@ Create A script that delete a file from folder
 3. print the list of files again.
 
 HINT: readdir, unlink
+
+
+# Homework
+- by using command `npm init`
+- create your own module 
+- inside the module create `index.js`
+- implement your own Function with your own logic
