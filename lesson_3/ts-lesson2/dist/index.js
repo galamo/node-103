@@ -26,3 +26,8 @@ async function getCarsApi() {
 async function init() {
     const result = await getCarsApi();
 }
+let globalUser = "this is global user";
+function changeGlobalUser() {
+    globalUser = "Eliyahu";
+}
+changeGlobalUser();
