@@ -1,0 +1,15 @@
+{
+    "name": "ts-lesson2",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "ts-init": "tsc --init",
+        "compile": "tsc --watch"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "typescript": "^5.5.2"
+    }
+}

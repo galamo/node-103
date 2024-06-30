@@ -1,0 +1,19 @@
+{
+    "name": "ts-lesson1",
+    "version": "2.0.0",
+    "description": "this is the first typescript lesson",
+    "main": "index.js",
+    "scripts": {
+        "compile": "tsc index.ts",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "ts",
+        "typescript"
+    ],
+    "author": "Gal Amouyal",
+    "license": "MIT",
+    "dependencies": {
+        "typescript": "^5.5.2"
+    }
+}
