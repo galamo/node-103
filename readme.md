@@ -37,3 +37,9 @@ HINT: readdir, unlink
 2. install the following package `npm i bring-them-home-now`
 3. execute inside the module a the following function `bringThemHomeNow.searchByLowerAge`
 4. explain whats this function actually doing? 
+
+
+# Ex 2 30.6
+1. create a function that fetch the data from the following API: http://129.159.129.38:8080/hostages
+2. print to the console the data fetched
+3. ADD TS Types to your function
