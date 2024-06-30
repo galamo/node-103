@@ -30,3 +30,10 @@ HINT: readdir, unlink
 - create your own module 
 - inside the module create `index.js`
 - implement your own Function with your own logic
+
+
+# Ex 1 30.6
+1. Create new module
+2. install the following package `npm i bring-them-home-now`
+3. execute inside the module a the following function `bringThemHomeNow.searchByLowerAge`
+4. explain whats this function actually doing? 
