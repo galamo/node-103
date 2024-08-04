@@ -43,3 +43,10 @@ HINT: readdir, unlink
 1. create a function that fetch the data from the following API: http://129.159.129.38:8080/hostages
 2. print to the console the data fetched
 3. ADD TS Types to your function
+
+
+
+# EX - 1 4.8.2024
+1. Create API that listen to port 4000
+2. The API will expose service ( entry point ) with the following path: /your-name
+3. the API will return your name to the client
