@@ -57,8 +57,9 @@ HINT: readdir, unlink
 2. Given the following data ( pasted at the bottom)
 3. Create the following Entry point:
 4. GET /cars - return all the cars to the client - as array 
-5. GET /cars/:color - return all the cars with the requested color 
-6. GET /car-by-model?model=Model - return all the cars with the requested model
+5. GET /cars/:color - return all the cars with the requested color (path params => req.params)
+6. GET /car-by-model?brand=Mercedes-Benz - return all the cars with the requested model (query params => req.query)
+7. GET /car-by-price?price=10000 - return all the cars that cost less than the price(hint:Number)
 
 ```json
 
