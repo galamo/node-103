@@ -50,3 +50,61 @@ HINT: readdir, unlink
 1. Create API that listen to port 4000
 2. The API will expose service ( entry point ) with the following path: /your-name
 3. the API will return your name to the client
+
+
+# Homework 4.8.2024
+1. Create new API
+2. Given the following data ( pasted at the bottom)
+3. Create the following Entry point:
+4. GET /cars - return all the cars to the client - as array 
+5. GET /cars/:color - return all the cars with the requested color 
+6. GET /car-by-model?model=Model - return all the cars with the requested model
+
+```json
+
+{
+  "cars": [
+    {
+      "brand": "Mercedes-Benz",
+      "model": "Citan",
+      "car body": "van",
+      "color": "red",
+      "price": "10000$",
+      "year": 2010
+    },
+    {
+      "brand": "Lexus",
+      "model": "GX",
+      "car body": "4WD",
+      "color": "black",
+      "price": "50000$",
+      "year": 2020
+    },
+    {
+      "brand": "Toyota",
+      "model": "RAV4",
+      "car body": "crossover",
+      "color": "gray",
+      "price": "15000$",
+      "year": 2015
+    },
+    {
+      "brand": "Hyundai",
+      "model": "Grand i10 Nios",
+      "car body": "hatchback",
+      "color": "yellow",
+      "price": "30000$",
+      "year": 2018
+    },
+    {
+      "brand": "Honda",
+      "model": "Civic",
+      "car body": "sedan",
+      "color": "blue",
+      "price": "25000$",
+      "year": 2010
+    }
+  ]
+}
+
+```
