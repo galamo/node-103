@@ -109,3 +109,8 @@ HINT: readdir, unlink
 }
 
 ```
+
+
+# EX 1 - 7.8
+1. Create POST request to POST http://localhost:4500/car
+2. use any solution you are thinking about!
