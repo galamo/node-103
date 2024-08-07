@@ -25,6 +25,7 @@ app.get("/message", (req, res, next) => {
 })
 
 app.post("/car", (req, res, next) => {
+    console.log("post car request...")
     res.send("POST!")
 })
 
