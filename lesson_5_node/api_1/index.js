@@ -1,9 +1,10 @@
 const express = require("express")
 const { logger } = require("./logger")
+const bodyParser = require("body-parser")
 const fs = require("node:fs")
 
 const app = express()
-
+app.use(bodyParser.json())
 let messages = [];
 
 function loadMessagesFromFile() {
@@ -25,9 +26,18 @@ app.get("/message", (req, res, next) => {
 })
 
 app.post("/car", (req, res, next) => {
-    console.log("post car request...")
-    res.send("POST!")
+    const cars = JSON.parse(fs.readFileSync("./cars.json", "utf-8"))
+    cars.push(req.body)
+    fs.writeFileSync("./cars.json", JSON.stringify(cars))
+    res.send("POST CAR!!!!!!-NOW CARS ARE SAVED IN FILE!!!")
 })
+
+app.get("/cars", (req, res, next) => {
+    const cars = JSON.parse(fs.readFileSync("./cars.json", "utf-8"))
+    res.json(cars)
+})
+
+
 
 app.listen(4500)
 
