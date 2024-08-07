@@ -119,3 +119,15 @@ HINT: readdir, unlink
 # EX 2 - 7.8
 1. Create POST API entry point ( on server side) POST  http://localhost:4500/favorite
 2. The API will save into JSON file - favorite movie
+
+
+
+# Homework
+Client side:
+1. Add functionality that save the favorites from the movies-client (react-103) - use the existing addToFavorite button - LEV
+2. Create a Page that fetch all the favorites movies 
+
+Server Side:
+1. Create Entry point `app.post("/favorites,(...)=>{...})` that save favorites in a JSON file
+2. Create Entry point `app.get("/favorites,(...)=>{...})` that return all the favorites movies from JSON file
+
