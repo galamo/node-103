@@ -131,3 +131,7 @@ Server Side:
 1. Create Entry point `app.post("/favorites,(...)=>{...})` that save favorites in a JSON file
 2. Create Entry point `app.get("/favorites,(...)=>{...})` that return all the favorites movies from JSON file
 
+# Ex - 1 11.8 
+- Create a middleware that logs every request start time + url + ip.
+
+
