@@ -138,3 +138,14 @@ Server Side:
 - Create new Router - loginRouter
 POST /auth/login {userName:"", password:""}
 POST /auth/register {userName:"", password:""}
+
+
+# Homework 11.8
+1. implement POST /auth/login entrypoint, the entrypoint will receive userName and password and return
+- success if the user and password exist in the json file
+- unauthorized 401 - if the user not exist OR password incorrect 
+
+2. client script for login request
+3. change the register entrypoint to save the users inside json file.
+
+4. ADVANCED!!!! - create react client instead 2.
