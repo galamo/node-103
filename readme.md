@@ -134,4 +134,7 @@ Server Side:
 # Ex - 1 11.8 
 - Create a middleware that logs every request start time + url + ip.
 
-
+# Ex - 2 11.8 
+- Create new Router - loginRouter
+POST /auth/login {userName:"", password:""}
+POST /auth/register {userName:"", password:""}
