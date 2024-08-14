@@ -2,6 +2,7 @@ import express, { Request, Response } from "express"
 
 const loginRouter = express.Router();
 const users = []
+
 loginRouter.post("/login", (req: Request, res: Response, next) => {
     res.status(200).json({ message: "ok" })
 })
