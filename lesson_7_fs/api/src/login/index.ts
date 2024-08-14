@@ -1,42 +1,64 @@
 import express, { Request, Response } from "express"
 import { z, ZodError } from "zod"
+import { ifUserExist } from "./handlers/register";
+import { getToken, loginUser } from "./handlers/login";
 const loginRouter = express.Router();
-const users = []
-
+const users: Array<RegisteredUser> = [{
+    userName: "michal@gmail.com",
+    fullName: "michal sivan sivan",
+    phone: "058545425",
+    password: "wiliwilAA111Aiw!!!",
+}]
+export const tokens: { [key: string]: LoginUser } = {};
 const passwordRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+const passwordSchema = z.string().regex(passwordRegex)
 const registerSchema = z.object({
     userName: z.string().email(),
     fullName: z.string(),
     phone: z.string().max(12),
-    password: z.string().regex(passwordRegex),
+    password: passwordSchema,
     yearOfBirth: z.number().optional()
 })
-type RegisteredUser = z.infer<typeof registerSchema>;
-
-
+const loginSchema = z.object({
+    userName: z.string().email(),
+    password: passwordSchema,
+})
+export type RegisteredUser = z.infer<typeof registerSchema>;
+export type LoginUser = z.infer<typeof loginSchema>;
 
 
 
 loginRouter.post("/login", (req: Request, res: Response, next) => {
-    res.status(200).json({ message: "ok" })
+    try {
+        loginSchema.parse(req.body)
+        const result = loginUser(users, req.body)
+        if (result === false) {
+            return res.status(401).json({ message: "Unauthorized" })
+        } else {
+            const token = getToken();
+            tokens[token] = result
+            return res.status(200).json({ message: "user loggedIn successfully!", token })
+        }
+    } catch (error: any) {
+        console.log(error?.errors, res.getHeader("x-request-id"))
+        return res.status(400).json({ error: "something went wrong" })
+    }
 })
-
-
 
 loginRouter.post("/register", (req: Request, res: Response, next) => {
     try {
         registerSchema.parse(req.body)
-        return res.status(200).json({ message: "ok" })
+        if (ifUserExist(users, req?.body?.userName)) {
+            return res.status(409).json({ message: "User already exist" })
+        }
+        users.push(req.body)
+        console.log(users)
+        return res.status(200).json({ message: "user registered successfully!" })
     } catch (error: any) {
         console.log(error?.errors, res.getHeader("x-request-id"))
         return res.status(400).json({ error: "something went wrong" })
     }
 
-    // if (!userName || !password) return res.status(400).send("Missing user name or password")
-    // else {
-    //     users.push({ userName, password })
-    //     return res.status(200).json({ message: "user registered sababa" })
-    // }
 })
 
 

@@ -1,7 +1,10 @@
 async function login() {
-    const result = await fetch(`http://localhost:3600/auth/register`, {
+    const result = await fetch(`http://localhost:3600/auth/login`, {
         method: "post",
-        body: JSON.stringify({ userName: "michal@gmail.com", password: "manaHama" }),
+        body: JSON.stringify({
+            userName: "michal@gmail.com",
+            password: "wiliwilAA111Aiw!!!",
+        }),
         headers: { "content-type": "application/json" }
     })
     const r = await result.json()
@@ -9,4 +12,4 @@ async function login() {
     return r;
 
 }
-registerUser()
+login()

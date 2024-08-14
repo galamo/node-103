@@ -7,6 +7,7 @@ import { accountRouter } from "./account"
 import { infoRouter } from "./info"
 import { loginRouter } from "./login"
 import bodyParser from "body-parser"
+import authenticate from "./middleware/authenticate"
 dotenv.config()
 
 const app = express()
@@ -14,10 +15,12 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(addRequestId)
 app.use(logRequest)
+app.use("/auth", loginRouter)
 
+app.use(authenticate)
 app.use("/", infoRouter)
 app.use("/account", accountRouter)
-app.use("/auth", loginRouter)
+
 
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
