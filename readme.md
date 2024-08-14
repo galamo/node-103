@@ -149,3 +149,9 @@ POST /auth/register {userName:"", password:""}
 3. change the register entrypoint to save the users inside json file.
 
 4. ADVANCED!!!! - create react client instead 2.
+
+
+
+# Ex 1 - 14/8 
+1. zod schema for login
+2. use the schema in the /login api
