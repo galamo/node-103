@@ -1,9 +1,7 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -15,8 +13,7 @@ import InsightsIcon from '@mui/icons-material/Insights';
 import { routes } from '../../../App';
 import { Link } from 'react-router-dom';
 
-export default function MoviesMenu(props: { isOpen: boolean, setIsOpen: any }) {
-    // const [open, setOpen] = React.useState(true);
+export default function AppMenu(props: { isOpen: boolean, setIsOpen: any }) {
     const { isOpen: open, setIsOpen: setOpen } = props
     const toggleDrawer = () => () => {
         setOpen(!open);

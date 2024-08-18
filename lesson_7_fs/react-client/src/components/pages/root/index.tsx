@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import MoviesMenu from "./movies-menu";
+import AppMenu from "./apps-menu";
 import { useState } from "react";
 
 export function Root() {
@@ -8,7 +8,7 @@ export function Root() {
 
     return (
         <div>
-            <MoviesMenu isOpen={isOpen} setIsOpen={setIsOpen} />
+            <AppMenu isOpen={isOpen} setIsOpen={setIsOpen} />
             <div style={{ marginLeft: isOpen ? "250px" : "0px" }}>
                 <Outlet />
             </div>

@@ -53,7 +53,9 @@ loginRouter.post("/register", (req: Request, res: Response, next) => {
         }
         users.push(req.body)
         console.log(users)
-        return res.status(200).json({ message: "user registered successfully!" })
+        setTimeout(() => {
+            return res.status(200).json({ message: "user registered successfully!" })
+        }, 1500);
     } catch (error: any) {
         console.log(error?.errors, res.getHeader("x-request-id"))
         return res.status(400).json({ error: "something went wrong" })

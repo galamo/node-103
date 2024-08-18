@@ -5,15 +5,10 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import { Home } from './components/pages/home';
-import Movies from './components/pages/movies';
-
 import { Root } from './components/pages/root';
-import Movie from './components/pages/movie';
-import FavoritesPage from './components/pages/favorites';
-import { ContextWrapper } from './components/context';
-import SettingsPage from './components/pages/settings';
-import StatisticsPage from './components/pages/statistics';
-import { CarsPage } from './components/pages/cars';
+import RegistrationForm from './components/pages/register';
+
+
 
 
 export const routes = [
@@ -24,42 +19,18 @@ export const routes = [
         element: <Home />,
     },
     {
-        path: "movies",
-        label: "Movies",
-        visible: true,
-        element: <Movies />,
-
-    },
-    {
-        path: "favorites",
-        label: "Favorites",
-        visible: true,
-        element: <FavoritesPage />,
-    },
-    {
-        path: "statistics",
-        label: "Statistics",
-        visible: true,
-        element: <StatisticsPage />,
-    },
-    {
-        path: "movie/:id",
-        label: "Single movie",
+        path: "register",
+        label: "Register",
         visible: false,
-        element: <Movie />,
+        element: <RegistrationForm />,
     },
     {
-        path: "settings",
-        label: "Settings",
-        visible: true,
-        element: <SettingsPage />,
+        path: "login",
+        label: "Login",
+        visible: false,
+        element: <div> Login </div>,
     },
-    {
-        path: "cars",
-        label: "cars",
-        visible: true,
-        element: <CarsPage />,
-    },
+
 ]
 const router = createBrowserRouter([
     {
@@ -75,9 +46,9 @@ function App() {
 
     return (
         <>
-            <ContextWrapper >
-                <RouterProvider router={router} />
-            </ContextWrapper>
+            {/* <ContextWrapper> */}
+            <RouterProvider router={router} />
+            {/* </ContextWrapper> */}
         </>
     )
 }
