@@ -155,3 +155,9 @@ POST /auth/register {userName:"", password:""}
 # Ex 1 - 14/8 
 1. zod schema for login
 2. use the schema in the /login api
+
+
+# Ex 1 - 18/4
+1. Add Client input validation for phonenumber
+2. `isPhoneNumberValid()`
+3. add state for `phoneNumberError`
