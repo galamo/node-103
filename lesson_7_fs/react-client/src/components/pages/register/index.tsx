@@ -9,14 +9,14 @@ import { z } from "zod"
 const passwordRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
 const passwordSchema = z.string().regex(passwordRegex)
 const emailSchema = z.string().email().min(15)
-const phoneSchema = z.string().max(12)
+const phoneSchema = z.string().min(10).max(10)
 const fullNameSchema = z.string().min(3).max(50)
 
 
 const RegistrationForm = () => {
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(false)
-    
+
     const [fullName, setFullName] = useState('');
     const [fullNameError, setFullNameError] = useState({ isError: false, errorMessage: "" });
 
@@ -24,9 +24,11 @@ const RegistrationForm = () => {
     const [usernameError, setUsernameError] = useState({ isError: false, errorMessage: "" });
 
     const [phone, setPhone] = useState('');
+    const [phoneError, setPhoneError] = useState({ isError: false, errorMessage: "" });
 
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState({ isError: false, errorMessage: "" });
+
     const [yearOfBirth, setYearOfBirth] = useState(1988);
 
     const handleSubmit = async () => {
@@ -43,30 +45,25 @@ const RegistrationForm = () => {
         // Handle form submission here, e.g., send data to an API
     };
 
-
-    function isDisabled(): boolean {
-        if (!username || !fullName || !password) {
+    function isSubmitDisabled(): boolean {
+        if (!username || !fullName || !password || !phone) {
             return true
         }
-        if (fullNameError.isError || usernameError.isError || passwordError.isError) {
+        if (fullNameError.isError || usernameError.isError || passwordError.isError || phoneError.isError) {
             return true
         }
         return false;
     }
 
     function isFullNameValid() {
-        if (!fullName) {
-            setFullNameError({ isError: true, errorMessage: "missing full name" })
-            return;
-        } else if (typeof fullName === 'string' && fullName.length < 3) {
-            setFullNameError({ isError: true, errorMessage: "full name too short" })
-            return;
-        } else {
+        const result = fullNameSchema.safeParse(fullName);
+        if (result.success) {
             setFullNameError({ isError: false, errorMessage: "" })
-            return;
+        } else {
+            const errors = result?.error?.issues.map(e => e.message)
+            setFullNameError({ isError: true, errorMessage: errors.join(", ") })
         }
     }
-
     function isUsernameValid() {
         const result = emailSchema.safeParse(username);
         if (result.success) {
@@ -76,7 +73,6 @@ const RegistrationForm = () => {
             setUsernameError({ isError: true, errorMessage: errors.join(", ") })
         }
     }
-
     function isPasswordValid() {
         const result = passwordSchema.safeParse(password);
         if (result.success) {
@@ -84,6 +80,15 @@ const RegistrationForm = () => {
         } else {
             const errors = result?.error?.issues.map(e => e.message)
             setPasswordError({ isError: true, errorMessage: errors.join(", ") })
+        }
+    }
+    function isPhoneNumberValid() {
+        const result = phoneSchema.safeParse(phone);
+        if (result.success) {
+            setPhoneError({ isError: false, errorMessage: "" })
+        } else {
+            const errors = result?.error?.issues.map(e => e.message)
+            setPhoneError({ isError: true, errorMessage: errors.join(", ") })
         }
     }
 
@@ -101,10 +106,10 @@ const RegistrationForm = () => {
             </React.Fragment>}>
                 <TextField onBlur={isPasswordValid} helperText={passwordError.errorMessage} error={passwordError.isError} label="Password" value={password} onChange={(e) => setPassword(e.target.value)} type="text" />
             </Tooltip>
-            <TextField label="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
+            <TextField onBlur={isPhoneNumberValid} helperText={phoneError.errorMessage} error={phoneError.isError} label="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
             <TextField label="Year of Birth" value={yearOfBirth} onChange={(e) => setYearOfBirth(Number(e.target.value))} type="number" />
 
-            {isLoading ? <LoadingLogin /> : <Button disabled={isDisabled()} variant="contained" onClick={handleSubmit} color="primary" type="button">Submit</Button>}
+            {isLoading ? <LoadingLogin /> : <Button disabled={isSubmitDisabled()} variant="contained" onClick={handleSubmit} color="primary" type="button">Submit</Button>}
         </form>
     );
 };

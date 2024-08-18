@@ -12,10 +12,15 @@ const users: Array<RegisteredUser> = [{
 export const tokens: { [key: string]: LoginUser } = {};
 const passwordRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
 const passwordSchema = z.string().regex(passwordRegex)
+const emailSchema = z.string().email().min(15)
+const phoneSchema = z.string().min(10).max(10)
+const fullNameSchema = z.string().min(3).max(50)
+
+
 const registerSchema = z.object({
-    userName: z.string().email(),
-    fullName: z.string(),
-    phone: z.string().max(12),
+    userName: emailSchema,
+    fullName: fullNameSchema,
+    phone: phoneSchema,
     password: passwordSchema,
     yearOfBirth: z.number().optional()
 })
