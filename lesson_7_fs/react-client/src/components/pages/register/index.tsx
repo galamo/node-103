@@ -3,18 +3,30 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { registerApi } from './service';
 import { useNavigate } from 'react-router-dom';
-import { CircularProgress, Skeleton } from '@mui/material';
+import { CircularProgress, IconButton, Skeleton, Tooltip } from '@mui/material';
+import { z } from "zod"
+
+const passwordRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+const passwordSchema = z.string().regex(passwordRegex)
+const emailSchema = z.string().email().min(15)
+const phoneSchema = z.string().max(12)
+const fullNameSchema = z.string().min(3).max(50)
 
 
 const RegistrationForm = () => {
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(false)
+    
     const [fullName, setFullName] = useState('');
     const [fullNameError, setFullNameError] = useState({ isError: false, errorMessage: "" });
+
     const [username, setUsername] = useState('');
     const [usernameError, setUsernameError] = useState({ isError: false, errorMessage: "" });
+
     const [phone, setPhone] = useState('');
+
     const [password, setPassword] = useState('');
+    const [passwordError, setPasswordError] = useState({ isError: false, errorMessage: "" });
     const [yearOfBirth, setYearOfBirth] = useState(1988);
 
     const handleSubmit = async () => {
@@ -33,10 +45,10 @@ const RegistrationForm = () => {
 
 
     function isDisabled(): boolean {
-        if (!username || !fullName) {
+        if (!username || !fullName || !password) {
             return true
         }
-        if (fullNameError.isError || usernameError.isError) {
+        if (fullNameError.isError || usernameError.isError || passwordError.isError) {
             return true
         }
         return false;
@@ -56,15 +68,22 @@ const RegistrationForm = () => {
     }
 
     function isUsernameValid() {
-        if (!username) {
-            setUsernameError({ isError: true, errorMessage: "missing username" })
-            return;
-        } else if (typeof username === 'string' && !username.includes("@")) {
-            setUsernameError({ isError: true, errorMessage: "username is not email" })
-            return;
-        } else {
+        const result = emailSchema.safeParse(username);
+        if (result.success) {
             setUsernameError({ isError: false, errorMessage: "" })
-            return;
+        } else {
+            const errors = result?.error?.issues.map(e => e.message)
+            setUsernameError({ isError: true, errorMessage: errors.join(", ") })
+        }
+    }
+
+    function isPasswordValid() {
+        const result = passwordSchema.safeParse(password);
+        if (result.success) {
+            setPasswordError({ isError: false, errorMessage: "" })
+        } else {
+            const errors = result?.error?.issues.map(e => e.message)
+            setPasswordError({ isError: true, errorMessage: errors.join(", ") })
         }
     }
 
@@ -73,8 +92,16 @@ const RegistrationForm = () => {
             <TextField onBlur={isFullNameValid} helperText={fullNameError.errorMessage} error={fullNameError.isError} label="Full Name" value={fullName} onChange={(e) => setFullName(e.target.value)} />
             <TextField onBlur={isUsernameValid} helperText={usernameError.errorMessage} error={usernameError.isError} label="Username (Email)" value={username} onChange={(e) => setUsername(e.target.value)} type="email" />
             {/* <Skeleton variant="rectangular" width={500} height={50} /> */}
+            <Tooltip title={<React.Fragment>
+                <span> Password must contain at least 16 characters </span>
+                <br>
+                </br>
+                <span> Password Contain Special character, Upper case, number </span>
+
+            </React.Fragment>}>
+                <TextField onBlur={isPasswordValid} helperText={passwordError.errorMessage} error={passwordError.isError} label="Password" value={password} onChange={(e) => setPassword(e.target.value)} type="text" />
+            </Tooltip>
             <TextField label="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
-            <TextField label="Password" value={password} onChange={(e) => setPassword(e.target.value)} type="password" />
             <TextField label="Year of Birth" value={yearOfBirth} onChange={(e) => setYearOfBirth(Number(e.target.value))} type="number" />
 
             {isLoading ? <LoadingLogin /> : <Button disabled={isDisabled()} variant="contained" onClick={handleSubmit} color="primary" type="button">Submit</Button>}
