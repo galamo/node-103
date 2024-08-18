@@ -33,8 +33,10 @@ const RegistrationForm = () => {
 
 
     function isDisabled(): boolean {
-        if (!fullNameError.isError) {
-            console.log("FIX THE BUTTON")
+        if (!username || !fullName) {
+            return true
+        }
+        if (fullNameError.isError || usernameError.isError) {
             return true
         }
         return false;
