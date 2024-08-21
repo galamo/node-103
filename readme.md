@@ -157,12 +157,12 @@ POST /auth/register {userName:"", password:""}
 2. use the schema in the /login api
 
 
-# Ex 1 - 18/4
+# Ex 1 - 18/8
 1. Add Client input validation for phonenumber
 2. `isPhoneNumberValid()`
 3. add state for `phoneNumberError`
 
 
-# Ex 2 - 18/4  + Homework
+# Ex 2 - 18/8  + Homework
 1. add input validation for phone + fullName
 2. Create a login page with client input validation
