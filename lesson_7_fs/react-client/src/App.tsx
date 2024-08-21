@@ -4,9 +4,11 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
-import { Home } from './components/pages/home';
+import { ClientSideProtector, Home } from './components/pages/home';
 import { Root } from './components/pages/root';
 import RegistrationForm from './components/pages/register';
+import LoginPage from './components/pages/login';
+import { Transactions } from './components/pages/Transactions';
 
 
 
@@ -16,7 +18,17 @@ export const routes = [
         path: "home",
         label: "Home",
         visible: true,
-        element: <Home />,
+        element: <ClientSideProtector>
+            <Home />
+        </ClientSideProtector>,
+    },
+    {
+        path: "transactions",
+        label: "Transactions",
+        visible: true,
+        element: <ClientSideProtector>
+            <Transactions />
+        </ClientSideProtector>,
     },
     {
         path: "register",
@@ -28,7 +40,7 @@ export const routes = [
         path: "login",
         label: "Login",
         visible: false,
-        element: <div> Login </div>,
+        element: <LoginPage />,
     },
 
 ]

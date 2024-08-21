@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export type User = {
+export type FullUser = {
     userName: string,
     password: string,
     phone: string,
@@ -9,7 +9,7 @@ export type User = {
 }
 const BASE_URL = `http://localhost:3600`
 
-export async function registerApi(user: User): Promise<{ message: string }> {
+export async function registerApi(user: FullUser): Promise<{ message: string }> {
     const result = await axios.post(`${BASE_URL}/auth/register`,
         user,
         { headers: { "content-type": "application/json" } })

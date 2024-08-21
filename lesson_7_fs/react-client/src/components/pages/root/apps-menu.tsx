@@ -18,6 +18,7 @@ export default function AppMenu(props: { isOpen: boolean, setIsOpen: any }) {
     const toggleDrawer = () => () => {
         setOpen(!open);
     };
+    const isLoggedIn = localStorage.getItem("token")
 
     const DrawerList = (
         <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer()}>
@@ -34,14 +35,23 @@ export default function AppMenu(props: { isOpen: boolean, setIsOpen: any }) {
                         </Link>
                     </ListItem>
                 ))}
+                {isLoggedIn ? <ListItem key={"logout"} >
+                    <ListItemButton>
+                        <ListItemIcon>
+                            Logout
+                        </ListItemIcon>
+                        <ListItemText />
+                    </ListItemButton>
+                </ListItem> : null}
             </List>
+
         </Box>
     );
 
     return (
         <div>
             <Button onClick={toggleDrawer()}>Menu</Button>
-            <Drawer variant="persistent" hideBackdrop={true} open={open} onClose={toggleDrawer()}>
+            <Drawer variant="persistent" hideBackdrop={true} open={true} onClose={toggleDrawer()}>
                 {DrawerList}
             </Drawer>
         </div>

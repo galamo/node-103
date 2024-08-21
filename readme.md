@@ -166,3 +166,10 @@ POST /auth/register {userName:"", password:""}
 # Ex 2 - 18/8  + Homework
 1. add input validation for phone + fullName
 2. Create a login page with client input validation
+
+
+
+# Ex 1 - 21/8 
+1. implement logout in react-client\src\components\pages\root\apps-menu.tsx
+2. use state
+3. clear localStorage token

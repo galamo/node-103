@@ -9,7 +9,7 @@ export function Root() {
     return (
         <div>
             <AppMenu isOpen={isOpen} setIsOpen={setIsOpen} />
-            <div style={{ marginLeft: isOpen ? "250px" : "0px" }}>
+            <div style={{ marginLeft: true ? "250px" : "0px" }}>
                 <Outlet />
             </div>
         </div>
