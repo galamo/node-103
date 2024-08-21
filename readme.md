@@ -192,3 +192,5 @@ POST /auth/register {userName:"", password:""}
 1. Authentication Add expiration time for token - 5 hours
 2. Support logout server side
 3. In login, in case the user already logged in, remove all the user previous tokens
+4. install docker for desktop on your machine
+
