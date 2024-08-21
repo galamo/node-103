@@ -173,3 +173,9 @@ POST /auth/register {userName:"", password:""}
 1. implement logout in react-client\src\components\pages\root\apps-menu.tsx
 2. use state
 3. clear localStorage token
+
+
+# Ex 2 - 21/8 
+1. Support token authentication in authorization header
+2. api => change the middleware to observe the header
+3. client => send the token as part of header authorization 

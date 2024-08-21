@@ -8,7 +8,7 @@ import { ClientSideProtector, Home } from './components/pages/home';
 import { Root } from './components/pages/root';
 import RegistrationForm from './components/pages/register';
 import LoginPage from './components/pages/login';
-import { Transactions } from './components/pages/Transactions';
+import { Transactions } from './components/pages/transactions';
 
 
 
