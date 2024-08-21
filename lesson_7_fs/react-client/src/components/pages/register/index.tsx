@@ -110,6 +110,10 @@ const RegistrationForm = () => {
             <TextField label="Year of Birth" value={yearOfBirth} onChange={(e) => setYearOfBirth(Number(e.target.value))} type="number" />
 
             {isLoading ? <LoadingLogin /> : <Button disabled={isSubmitDisabled()} variant="contained" onClick={handleSubmit} color="primary" type="button">Submit</Button>}
+            <Button variant="contained" onClick={() => {
+                navigate("/login")
+            }} color="primary" type="button">Already have a user</Button>
+
         </form>
     );
 };

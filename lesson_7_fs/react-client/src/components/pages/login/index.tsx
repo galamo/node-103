@@ -16,11 +16,11 @@ const LoginPage = () => {
     const [isLoading, setIsLoading] = useState(false)
 
 
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState('galamaaao111@gmail.com');
     const [usernameError, setUsernameError] = useState({ isError: false, errorMessage: "" });
 
 
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState('galamaaao111!Agmailcom');
     const [passwordError, setPasswordError] = useState({ isError: false, errorMessage: "" });
 
 
@@ -30,6 +30,7 @@ const LoginPage = () => {
             const result = await loginApi({ userName: username, password })
             if (result.token) {
                 localStorage.setItem("token", result.token)
+                window.location.href = "/home"
             }
             console.log(result)
         } catch (error) {
@@ -65,6 +66,8 @@ const LoginPage = () => {
                 <TextField label="Password" value={password} onChange={(e) => setPassword(e.target.value)} type="text" />
             </Tooltip>
             {isLoading ? <LoadingLogin /> : <Button disabled={isSubmitDisabled()} variant="contained" onClick={handleSubmit} color="primary" type="button">Submit</Button>}
+            <Button variant="contained" onClick={() => { navigate("/register") }} color="primary" type="button">Join us</Button>
+
         </form>
     );
 };

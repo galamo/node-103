@@ -36,7 +36,10 @@ export default function AppMenu(props: { isOpen: boolean, setIsOpen: any }) {
                     </ListItem>
                 ))}
                 {isLoggedIn ? <ListItem key={"logout"} >
-                    <ListItemButton>
+                    <ListItemButton onClick={() => {
+                        localStorage.removeItem("token")
+                        window.location.href = "/home"
+                    }}>
                         <ListItemIcon>
                             Logout
                         </ListItemIcon>
