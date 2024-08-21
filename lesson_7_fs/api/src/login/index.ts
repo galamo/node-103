@@ -9,7 +9,8 @@ const users: Array<RegisteredUser> = [{
     phone: "058545425",
     password: "wiliwilAA111Aiw!!!",
 }]
-export const tokens: { [key: string]: LoginUser } = {};
+export const tokens: { [key: string]: LoginUser } =
+    { "404f3b16-eb35-46af-9b3b-2b9e39229fe1": { userName: "gal", password: "www" } };
 const passwordRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
 const passwordSchema = z.string().regex(passwordRegex)
 const emailSchema = z.string().email().min(15)

@@ -179,3 +179,16 @@ POST /auth/register {userName:"", password:""}
 1. Support token authentication in authorization header
 2. api => change the middleware to observe the header
 3. client => send the token as part of header authorization 
+
+
+# Ex 3 - 21/8 
+1. Home Page - create axios get request to /info and present the bank account in the UI
+2. use the axiosInstance 
+
+
+
+
+# Homework 
+1. Authentication Add expiration time for token - 5 hours
+2. Support logout server side
+3. In login, in case the user already logged in, remove all the user previous tokens
