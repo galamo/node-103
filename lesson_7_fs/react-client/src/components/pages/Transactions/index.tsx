@@ -20,9 +20,7 @@ export function Transactions() {
                 setIsLoading(false)
             }
         }
-        setTimeout(() => {
-            getTransactions()
-        }, 3000);
+        getTransactions()
     }, [])
 
     if (isLoading) return <h2>Loading..</h2>
