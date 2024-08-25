@@ -2,6 +2,7 @@ import express, { Request, Response } from "express"
 import { z, ZodError } from "zod"
 import { ifUserExist } from "./handlers/register";
 import { getToken, loginUser } from "./handlers/login";
+import { removePrevUserTokens } from "./handlers/removePrevUserTokens";
 const loginRouter = express.Router();
 const users: Array<RegisteredUser> = [{
     userName: "michal@gmail.com",
@@ -9,8 +10,12 @@ const users: Array<RegisteredUser> = [{
     phone: "058545425",
     password: "wiliwilAA111Aiw!!!",
 }]
-export const tokens: { [key: string]: LoginUser } =
-    { "404f3b16-eb35-46af-9b3b-2b9e39229fe1": { userName: "gal", password: "www" } };
+type tokenObject = {
+    currentTimeStamp: string
+    user: LoginUser
+}
+export const tokens: { [key: string]: tokenObject } =
+    { "404f3b16-eb35-46af-9b3b-2b9e39229fe1": { user: { userName: "gal", password: "www" }, currentTimeStamp: new Date().toISOString() } };
 const passwordRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
 const passwordSchema = z.string().regex(passwordRegex)
 const emailSchema = z.string().email().min(15)
@@ -41,8 +46,10 @@ loginRouter.post("/login", (req: Request, res: Response, next) => {
         if (result === false) {
             return res.status(401).json({ message: "Unauthorized" })
         } else {
+            removePrevUserTokens(result.userName)
+            const currentTimeStamp = new Date().toISOString()
             const token = getToken();
-            tokens[token] = result
+            tokens[token] = { user: result, currentTimeStamp: currentTimeStamp }
             return res.status(200).json({ message: "user loggedIn successfully!", token })
         }
     } catch (error: any) {
@@ -68,6 +75,8 @@ loginRouter.post("/register", (req: Request, res: Response, next) => {
     }
 
 })
+
+
 
 
 export { loginRouter }

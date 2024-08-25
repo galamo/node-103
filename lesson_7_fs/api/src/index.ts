@@ -5,9 +5,9 @@ import logRequest from "./middleware/logRequest"
 import cors from "cors"
 import { accountRouter } from "./account"
 import { infoRouter } from "./info"
-import { loginRouter } from "./login"
+import { loginRouter, tokens } from "./login"
 import bodyParser from "body-parser"
-import authenticate from "./middleware/authenticate"
+import authenticate, { getTokenFromHeaders } from "./middleware/authenticate"
 dotenv.config()
 
 const app = express()
@@ -20,6 +20,11 @@ app.use("/auth", loginRouter)
 app.use(authenticate)
 app.use("/", infoRouter)
 app.use("/account", accountRouter)
+app.use("/logout", (req, res, next) => {
+    const token = getTokenFromHeaders(req)
+    delete tokens[token]
+    return res.status(200).send("logout")
+})
 
 
 
